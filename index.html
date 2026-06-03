@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- chart.js cdn -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div class="container">
+
+    <header class="app-header">
+      <h1>Expense Tracker</h1>
+      <button id="openModalBtn" class="btn-add">+ Add Expense</button>
+    </header>
+
+    <!-- filters -->
+    <div class="filters">
+      <select id="filterCategory">
+        <option value="all">All Categories</option>
+        <option value="Food">Food</option>
+        <option value="Transport">Transport</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Health">Health</option>
+        <option value="Education">Education</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Bills">Bills</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <select id="filterMonth">
+        <option value="all">All Months</option>
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
+      </select>
+
+      <select id="filterYear">
+        <option value="all">All Years</option>
+      </select>
+    </div>
+
+    <!-- total bar -->
+    <div class="total-bar">
+      <span>Total: <strong id="totalAmount">$0.00</strong></span>
+      <span id="expenseCount">0 expenses</span>
+    </div>
+
+    <!-- expense list -->
+    <div id="expenseList" class="expense-list">
+      <p class="empty-msg">No expenses yet. Add one!</p>
+    </div>
+
+    <!-- monthly summary section -->
+    <div class="summary-section">
+      <h2>Monthly Summary</h2>
+      <div class="summary-controls">
+        <select id="summaryMonth">
+          <option value="1">January</option>
+          <option value="2">February</option>
+          <option value="3">March</option>
+          <option value="4">April</option>
+          <option value="5">May</option>
+          <option value="6">June</option>
+          <option value="7">July</option>
+          <option value="8">August</option>
+          <option value="9">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+        <select id="summaryYear"></select>
+      </div>
+
+      <div class="chart-area">
+        <div class="chart-wrap">
+          <canvas id="pieChart"></canvas>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="barChart"></canvas>
+        </div>
+      </div>
+
+      <div id="summaryStats" class="summary-stats"></div>
+    </div>
+
+  </div>
+
+  <!-- modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Add Expense</h3>
+        <button id="closeModalBtn" class="close-btn">&times;</button>
+      </div>
+      <form id="expenseForm">
+        <div class="form-group">
+          <label for="inputTitle">Title</label>
+          <input type="text" id="inputTitle" placeholder="e.g. Grocery shopping" required />
+        </div>
+        <div class="form-group">
+          <label for="inputAmount">Amount ($)</label>
+          <input type="number" id="inputAmount" placeholder="0.00" min="0.01" step="0.01" required />
+        </div>
+        <div class="form-group">
+          <label for="inputCategory">Category</label>
+          <select id="inputCategory">
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Health">Health</option>
+            <option value="Education">Education</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Bills">Bills</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="inputDate">Date</label>
+          <input type="date" id="inputDate" required />
+        </div>
+        <div class="form-group">
+          <label for="inputNote">Note (optional)</label>
+          <input type="text" id="inputNote" placeholder="short description..." />
+        </div>
+        <div class="form-actions">
+          <button type="button" id="cancelBtn" class="btn-cancel">Cancel</button>
+          <button type="submit" class="btn-save">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
